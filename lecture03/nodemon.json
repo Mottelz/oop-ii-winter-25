@@ -1,0 +1,10 @@
+{
+    "ext": "env,js,json",
+    "ignore": [
+        ".git",
+        "node_modules",
+        "nodemon.json",
+        "eslint.config.js"
+    ],
+    "verbose": false
+}

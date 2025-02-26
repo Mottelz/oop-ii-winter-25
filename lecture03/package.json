@@ -1,0 +1,22 @@
+{
+  "name": "lecture03",
+  "version": "1.0.0",
+  "description": "A web app built for learning purposes",
+  "license": "ISC",
+  "author": "Mottel Zirkind",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --env-file=.env index.js",
+    "dev": "nodemon --env-file=.env index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "eslint": "^9.21.0",
+    "globals": "^16.0.0",
+    "nodemon": "^3.1.9"
+  }
+}
