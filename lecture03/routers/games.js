@@ -1,12 +1,15 @@
 const router = require("express").Router();
+const { getAllGames, getGameById } = require("../models/games");
 
-router.get("/games", (req, res) => {
-  res.json({ msg: "This library does not have any games yet." });
+router.get("/games", async (req, res) => {
+  const games = await getAllGames();
+  res.json({ games });
 });
 
-router.get("/games/:id", (req, res) => {
+router.get("/games/:id", async (req, res) => {
   const gid = req.params.id;
-  res.json({ gid, msg: `${gid} is not a valid id.` });
+  const game = await getGameById(gid);
+  res.json(game);
 });
 
 router.post("/games", (req, res) => {
