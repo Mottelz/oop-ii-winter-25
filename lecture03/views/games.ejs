@@ -1,0 +1,24 @@
+<%- include('parts/header'); -%>
+<table>
+        <thead>
+            <tr>
+                <th>Game</th>
+                <th>Year</th>
+                <th>Publisher</th>
+                <th>Developer</th>
+                <th>Genres</th>
+            </tr>
+        </thead>
+        <tbody>
+                <% games.forEach(function(game) { %>
+                    <tr>
+                        <td><%= game.game_name %></td>
+                        <td><%= game.release_year %></td>
+                        <td><%= game.publisher %></td>
+                        <td><%= game.developer %></td>
+                        <td><%= game.genres %></td>
+                    </tr>
+                <%});%>
+        </tbody>
+    </table>
+<%- include('parts/footer'); -%>
