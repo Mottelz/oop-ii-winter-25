@@ -16,7 +16,17 @@ const getAllGames = async () => {
     LEFT JOIN genres ON is_genre.genre = genres.id
     GROUP BY games.id;
 `);
-  return await stmnt.all();
+
+  let games;
+
+  try {
+    games = await stmnt.all();
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+
+  return games ? games : null;
 };
 
 const getGameById = async (id) => {
@@ -37,14 +47,31 @@ const getGameById = async (id) => {
     GROUP BY games.id;
 `);
 
-  return await stmnt.get(id);
+  let game;
+
+  try {
+    game = await stmnt.get(id);
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+
+  return game ? game : null;
 };
 
 const addGame = async ({ name, publisher, year, developer }) => {
   const stmnt = db.prepare(
     "INSERT INTO games (name, publisher, year, developer) VALUES (@name, @publisher, @year, @developer)",
   );
-  return await stmnt.run({ name, publisher, developer, year });
+
+  try {
+    await stmnt.run({ name, publisher, developer, year });
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+
+  return true;
 };
 
 module.exports = {
