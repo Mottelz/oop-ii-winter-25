@@ -1,0 +1,25 @@
+<%- include('parts/header'); -%>
+<form action="/games" method="post">
+    <label for="name">Title</label>
+    <input type="text" name="name" id="name" placeholder="Title" required>
+    <br><br>
+    <label for="year">Year Published</label>
+    <input type="number" min="1000" max="9999" name="year" id="year" placeholder="1991" required>
+    <br><br>
+    <label for="publihser">Publisher</label>
+    <select name="publisher" id="publisher" required>
+        <% companies.forEach(function(company) { %>
+            <option value="<%= company.id %>"><%= company.name %></option>
+        <% }) %>
+    </select>
+    <label for="developer">Developer</label>
+    <select name="developer" id="developer" required>
+        <% companies.forEach(function(company) { %>
+            <option value="<%= company.id %>"><%= company.name %></option>
+        <% }) %>
+    </select>
+    <br>
+    <br>
+    <input type="submit" value="Add Game">
+</form>
+<%- include('parts/footer'); -%>

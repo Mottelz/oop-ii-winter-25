@@ -22,6 +22,17 @@ app.get("/", (req, res) => {
   res.render("index", { title: "Home" });
 });
 
+app.all("*", (req, res) => {
+  res.status(404).render("404", { title: "404 Not Found" });
+});
+
+// Error Handler
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Internal Error :(");
+});
+
 // Run app
 app.listen(port, () => {
   console.log(`Example app listening on http://localhost:${port}`);
