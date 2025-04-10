@@ -22,3 +22,10 @@ tbody > tr:nth-child(odd) {
 tbody > tr:nth-child(even) {
   background-color: rgb(61, 187, 254);
 }
+
+.footer {
+  width: 100%;
+  text-align: center;
+  display: block;
+  margin-top: 2rem;
+}

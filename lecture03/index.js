@@ -1,6 +1,8 @@
 // Base imports
 const express = require("express");
 const bodyParser = require("body-parser");
+const { routeLogger } = require("./middleware/logger");
+const { errorHandler } = require("./middleware/errorHandler.js");
 
 // Router Imports
 const gamesRouter = require("./routers/games.js");
@@ -13,25 +15,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.use(express.static("./public"));
+app.use(routeLogger);
 
 // Load routers
 app.use("", mainRouter);
 app.use("", gamesRouter);
 
-app.get("/", (req, res) => {
-  res.render("index", { title: "Home" });
-});
-
+// 404 Error
 app.all("*", (req, res) => {
-  res.status(404).render("404", { title: "404 Not Found" });
+  res.status(404).render("error", { title: "404 Not Found", msg: "This page was not found." });
 });
 
-// Error Handler
-// eslint-disable-next-line no-unused-vars
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Internal Error :(");
-});
+app.use(errorHandler);
 
 // Run app
 app.listen(port, () => {
