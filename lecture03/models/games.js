@@ -63,15 +63,16 @@ const addGame = async ({ name, publisher, year, developer }) => {
   const stmnt = db.prepare(
     "INSERT INTO games (name, publisher, year, developer) VALUES (@name, @publisher, @year, @developer)",
   );
+  let result;
 
   try {
-    await stmnt.run({ name, publisher, developer, year });
+    result = await stmnt.run({ name, publisher, developer, year });
   } catch (err) {
     console.error(err);
-    return false;
+    return null;
   }
 
-  return true;
+  return result;
 };
 
 module.exports = {

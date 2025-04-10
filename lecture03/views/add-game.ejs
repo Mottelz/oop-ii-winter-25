@@ -6,16 +6,25 @@
     <label for="year">Year Published</label>
     <input type="number" min="1000" max="9999" name="year" id="year" placeholder="1991" required>
     <br><br>
-    <label for="publihser">Publisher</label>
+    <label for="publisher">Publisher</label>
     <select name="publisher" id="publisher" required>
         <% companies.forEach(function(company) { %>
             <option value="<%= company.id %>"><%= company.name %></option>
         <% }) %>
     </select>
+    <br></br>
     <label for="developer">Developer</label>
     <select name="developer" id="developer" required>
         <% companies.forEach(function(company) { %>
             <option value="<%= company.id %>"><%= company.name %></option>
+        <% }) %>
+    </select>
+    <br>
+    <br>
+    <label for="genres">Select All Genres</label><br>
+    <select name="genres" id="genres" multiple>
+        <% genres.forEach(function(genre) { %>
+            <option value="<%= genre.id %>"><%= genre.name %></option>
         <% }) %>
     </select>
     <br>
