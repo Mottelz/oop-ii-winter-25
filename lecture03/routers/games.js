@@ -1,14 +1,7 @@
 const router = require("express").Router();
-const { 
-  getAllGames, 
-  getGameById, 
-  addGame 
-} = require("../models/games");
+const { getAllGames, getGameById, addGame } = require("../models/games");
 const { getAllCompanies } = require("../models/companies");
-const { 
-  getAllGenres,
-  addGenreToGame
- } = require('../models/genres')
+const { getAllGenres, addGenreToGame } = require("../models/genres");
 
 router.get("/games", async (req, res) => {
   const games = await getAllGames();
@@ -50,7 +43,7 @@ router.post("/games", async (req, res) => {
   const gameId = result.lastInsertRowid;
 
   await genres.map(async (genreId) => {
-    await addGenreToGame({gameId, genreId});
+    await addGenreToGame({ gameId, genreId });
   });
 
   res.redirect(`/games/${gameId}`);

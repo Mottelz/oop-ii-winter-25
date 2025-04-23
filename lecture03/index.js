@@ -23,7 +23,12 @@ app.use("", gamesRouter);
 
 // 404 Error
 app.all("*", (req, res) => {
-  res.status(404).render("error", { title: "404 Not Found", msg: "This page was not found." });
+  res
+    .status(404)
+    .render("error", {
+      title: "404 Not Found",
+      msg: "This page was not found.",
+    });
 });
 
 app.use(errorHandler);
