@@ -29,3 +29,9 @@ tbody > tr:nth-child(even) {
   display: block;
   margin-top: 2rem;
 }
+
+.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}

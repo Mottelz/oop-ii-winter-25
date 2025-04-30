@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const { getAllGames, getGameById, addGame } = require("../models/games");
-const { getAllCompanies } = require("../models/companies");
-const { getAllGenres, addGenreToGame } = require("../models/genres");
+const { getAllGames, getGameById, addGame } = require("../models/games.model");
+const { getAllCompanies } = require("../models/companies.model");
+const { getAllGenres, addGenreToGame } = require("../models/genres.model");
 
 router.get("/games", async (req, res) => {
   const games = await getAllGames();

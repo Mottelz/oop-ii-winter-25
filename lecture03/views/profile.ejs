@@ -1,0 +1,17 @@
+<%- include('parts/header'); -%>
+    <h1><%= title %></h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Token</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><%= user.username %></td>
+                <td><%= user.token %></td>
+            </tr>
+        </tbody>
+    </table>
+<%- include('parts/footer'); -%>
