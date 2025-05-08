@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { verifyToken } = require("../middleware/auth");
 const { createUser } = require("../models/users.model");
 const {
   encryptPassword,
@@ -44,6 +45,10 @@ router.post("/login", async (req, res) => {
   const password = req.body.password;
   const user = await validateUser(username, password);
   if (user) {
+    res.cookie("authCookie", user.token, {
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      httpOnly: true,
+    });
     res.render("profile", { title: `${user.username}'s Profile`, user });
   } else {
     res.redirect("/login");
@@ -54,6 +59,17 @@ router.post("/login", async (req, res) => {
 router.get("/signup", (req, res) => {
   // TODO: confirm user is not logged in
   res.render("signup", { title: "signup" });
+});
+
+router.get("/profile", verifyToken, (req, res) => {
+  if (req.user.permissions === 1) {
+    res.render("profile", {
+      title: `${req.user.username}'s Profile`,
+      user: req.user,
+    });
+  } else {
+    res.redirect("/");
+  }
 });
 
 module.exports = router;
