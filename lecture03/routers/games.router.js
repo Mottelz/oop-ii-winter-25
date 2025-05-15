@@ -2,10 +2,18 @@ const router = require("express").Router();
 const { getAllGames, getGameById, addGame } = require("../models/games.model");
 const { getAllCompanies } = require("../models/companies.model");
 const { getAllGenres, addGenreToGame } = require("../models/genres.model");
+const {
+  PERMISSIONS,
+  verifyToken,
+  verifyPermissions,
+} = require("../middleware/auth");
 
-router.get("/games", async (req, res) => {
+router.get("/games", verifyToken, async (req, res) => {
   const games = await getAllGames();
-  if (games) {
+  if (
+    verifyPermissions(req.user.permissions, PERMISSIONS.VIEW_GAMES) &&
+    games
+  ) {
     res.render("games", { title: `${games.length} Games`, games });
   } else {
     res.redirect("/");

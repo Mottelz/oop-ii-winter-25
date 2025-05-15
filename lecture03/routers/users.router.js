@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { verifyToken } = require("../middleware/auth");
+const { verifyToken, verifyLoggedIn } = require("../middleware/auth");
 const { createUser } = require("../models/users.model");
 const {
   encryptPassword,
@@ -55,10 +55,22 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// get signup form
-router.get("/signup", (req, res) => {
-  // TODO: confirm user is not logged in
-  res.render("signup", { title: "signup" });
+router.get("/logout", verifyLoggedIn, (req, res) => {
+  if (req.loggedIn) {
+    res.cookie("authCookie", null, {
+      maxAge: 1,
+    });
+  }
+
+  res.redirect("/login");
+});
+
+router.get("/signup", verifyLoggedIn, (req, res) => {
+  if (req.loggedIn) {
+    res.redirect("/profile");
+  } else {
+    res.render("signup", { title: "signup" });
+  }
 });
 
 router.get("/profile", verifyToken, (req, res) => {
